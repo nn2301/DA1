@@ -1,80 +1,45 @@
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="author" content="Untree.co" />
-<meta name="description" content="" />
-<meta name="keywords" content="bootstrap, bootstrap4" />
-<link rel="shortcut icon" href="./public/upload/images/favicon.png" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Riosogood</title>
+<!DOCTYPE html>
+<html lang="en">
 
-<?php include "./app/view/header.php" ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaukeFurniture</title>
+</head>
 
-<?php
-require_once('./app/controller/HomeController.php');
-require_once('./app/controller/UserController.php');
-require_once('./app/controller/ProductController.php');
-require_once('./app/controller/ServicesController.php');
-require_once('./app/controller/ShopController.php');
-require_once('./app/controller/CartController.php');
-require_once('./app/controller/AboutController.php');
-require_once('./app/controller/CateshopController.php');
-require_once('./app/model/UserModel.php');
-require_once('./app/model/categoryModel.php');
-require_once('./app/model/database.php');
-require_once('./app/model/productModel.php');
-?>
+<body>
 
-<?php
-if (isset($_GET['act'])) {
-    $page = $_GET['act'];
+    <?php
+    require_once './views/header.php';
+    require_once './autoload.php';
+    require_once './views/home.php';
 
-    switch ($page) {
-        case 'signin':
-            $login = new UserController();
-            $login->signinUser();
-            break;
-        case 'register':
-            $signin = new UserController();
-            $signin->addUser();
-            break;
-        case 'shop':
-            $shop = new ShopController();
-            $shop->getAll();
-            break;
-            break;
-        case 'cart':
-            $cart = new CartController();
-            $cart->viewCart();
-            break;
-        case 'about':
-            $about = new AboutController();
-            $about->viewAbout();
-            break;
-        case 'blog':
-            $blog = new BlogController();
-            $blog->viewBlog();
-            break;
-        case 'services':
-            $services = new ServicesController();
-            $services->viewServices();
-            break;
-        case 'detail':
-            $product = new ProductController();
-            $product->viewDetail();
-            break;
-        case 'cateshop':
-            $cateshop = new CateShopController();
-            $cateshop->viewCateShop();
-            break;
-        default:
-            $home = new HomeController();
-            $home->getHome();
-            break;
-    }
-} else {
-    $home = new HomeController();
-    $home->getHome();
-}
+    // // Lấy tham số 'act' và đảm bảo an toàn XSS
+    // $page = htmlspecialchars($_GET['act'] ?? 'home');
 
-require_once('./app/view/footer.php');
-?>
+    // // Mảng ánh xạ các trang đến các controller và phương thức tương ứng
+    // $controllers = [
+    //     'signin' => [UserController::class, 'signinUser'],
+    //     'register' => [UserController::class, 'addUser'],
+    //     'shop' => [ShopController::class, 'getAll'],
+    //     'cart' => [CartController::class, 'viewCart'],
+    //     'about' => [AboutController::class, 'viewAbout'],
+    //     'blog' => [BlogController::class, 'viewBlog'],
+    //     'services' => [ServicesController::class, 'viewServices'],
+    //     'detail' => [ProductController::class, 'viewDetail'],
+    //     'cateshop' => [CateShopController::class, 'viewCateShop'],
+    //     'home' => [HomeController::class, 'getHome'],
+    // ];
+
+    // // Lấy controller và phương thức dựa trên `act`, nếu không có thì dùng `home`
+    // $action = $controllers[$page] ?? $controllers['home'];
+    // [$controller, $method] = $action;
+    // $instance = new $controller();
+    // $instance->$method();
+
+    require_once './views/footer.php';
+    ?>
+
+</body>
+
+</html>
